@@ -4,7 +4,7 @@ const {
   textFetchBuilder
 } = require('./helper/fetch-builder')
 
-const TIMEOUT_SECONDS = 5000
+const TIMEOUT_SECONDS = 1000
 
 const getTextReqBuilder = target =>
   new AssertBuilder(target, textFetchBuilder(target))
@@ -40,7 +40,9 @@ function all () {
 
     getTextReqBuilder(process.env.DNS_PORTAL_TARGET),
 
-    getTextReqBuilder(process.env.DNS_2CNNCT_TARGET)
+    getTextReqBuilder(process.env.DNS_2CNNCT_TARGET),
+
+    getTextReqBuilder(process.env.DNS_3CNNCT_TARGET)
   ]
 }
 
