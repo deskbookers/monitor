@@ -36,11 +36,11 @@ function all () {
       .isPostgresHealthy('authentication'),
 
     getBuilder(process.env.DNS_SEARCH_TARGET)
-      .isPostgresHealthy()
+      .isPostgresHealthy(),
 
-    // getTextReqBuilder(process.env.DNS_PORTAL_TARGET),
+    getTextReqBuilder(process.env.DNS_PORTAL_TARGET),
 
-    // getTextReqBuilder(process.env.DNS_2CNNCT_TARGET)
+    getTextReqBuilder(process.env.DNS_2CNNCT_TARGET)
   ]
 }
 
