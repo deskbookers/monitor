@@ -10,11 +10,8 @@ async function main () {
     .filter(x => !x.result)
     .map(err => `Error on ${err.context.target}: ${err.message}`)
 
-  console.log(errors)
-
   if (errors && errors.length) {
-    const body = errors.join('\n')
-    await email.send('There is something wrong! 😱😱😱 ', body)
+    await email.send('There is something wrong! 😱😱😱 ', errors)
   }
 }
 

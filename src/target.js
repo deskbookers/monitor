@@ -1,6 +1,9 @@
-const { jsonFetchBuilder, textFetchBuilder } = require('./helper/fetch-builder')
+const AssertBuilder = require('./AssertBuilder')
+const {
+  jsonFetchBuilder,
+  textFetchBuilder
+} = require('./helper/fetch-builder')
 
-const AssertBuilder = require('./check')
 const TIMEOUT_SECONDS = 5000
 
 const getTextReqBuilder = target =>
@@ -20,24 +23,24 @@ const getDefaultBuilder = target =>
 
 function all () {
   return [
-    getDefaultBuilder('http://localhost:3007/status'),
-    getDefaultBuilder('http://localhost:3017/status'),
-    getDefaultBuilder('http://localhost:3006/status'),
+    getDefaultBuilder(process.env.DNS_AVAILABILITY_TARGET),
+    getDefaultBuilder(process.env.DNS_FEATURES_TARGET),
+    getDefaultBuilder(process.env.DNS_NOTIFICATIONS_TARGET),
 
-    getBuilder('http://localhost:3100/status')
+    getBuilder(process.env.DNS_PAYMENTS_TARGET)
       .isPostgresHealthy('authentication')
       .isRedisHealthy(),
 
-    getBuilder('http://localhost:3031/status')
+    getBuilder(process.env.DNS_REPORTS_TARGET)
       .isPostgresHealthy()
       .isPostgresHealthy('authentication'),
 
-    getBuilder('http://localhost:3012/status')
-      .isPostgresHealthy(),
+    getBuilder(process.env.DNS_SEARCH_TARGET)
+      .isPostgresHealthy()
 
-    getTextReqBuilder('http://deskbookers.local'),
+    // getTextReqBuilder(process.env.DNS_PORTAL_TARGET),
 
-    getTextReqBuilder('http://2cnnct.deskbookers.local')
+    // getTextReqBuilder(process.env.DNS_2CNNCT_TARGET)
   ]
 }
 
