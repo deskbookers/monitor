@@ -13,9 +13,9 @@ async function main () {
     .map(err => `Error on ${err.context.target}: ${err.message}`)
 
   if (errors && errors.length) {
-    console.log('Errors found! sendind emai...')
+    console.log('Errors found! sending email...')
     console.log(errors.join('\n'))
-    await email.send('There is something wrong! 😱😱😱 ', errors)
+    await email.send('There is something wrong! 😱😱😱', errors)
   } else {
     console.log('No errors found!')
   }

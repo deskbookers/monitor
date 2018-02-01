@@ -4,7 +4,19 @@ const {
   textFetchBuilder
 } = require('./helper/fetch-builder')
 
-const TIMEOUT_SECONDS = 1000
+const TIMEOUT_SECONDS = 5000
+
+const {
+  DNS_AVAILABILITY_TARGET,
+  DNS_FEATURES_TARGET,
+  DNS_NOTIFICATIONS_TARGET,
+  DNS_PAYMENTS_TARGET,
+  DNS_REPORTS_TARGET,
+  DNS_SEARCH_TARGET,
+  DNS_PORTAL_TARGET,
+  DNS_2CNNCT_TARGET,
+  DNS_3CNNCT_TARGET
+} = process.env
 
 const getTextReqBuilder = target =>
   new AssertBuilder(target, textFetchBuilder(target))
@@ -23,26 +35,26 @@ const getDefaultBuilder = target =>
 
 function all () {
   return [
-    getDefaultBuilder(process.env.DNS_AVAILABILITY_TARGET),
-    getDefaultBuilder(process.env.DNS_FEATURES_TARGET),
-    getDefaultBuilder(process.env.DNS_NOTIFICATIONS_TARGET),
+    getDefaultBuilder(DNS_AVAILABILITY_TARGET),
+    getDefaultBuilder(DNS_FEATURES_TARGET),
+    getDefaultBuilder(DNS_NOTIFICATIONS_TARGET),
 
-    getBuilder(process.env.DNS_PAYMENTS_TARGET)
+    getBuilder(DNS_PAYMENTS_TARGET)
       .isPostgresHealthy('authentication')
       .isRedisHealthy(),
 
-    getBuilder(process.env.DNS_REPORTS_TARGET)
+    getBuilder(DNS_REPORTS_TARGET)
       .isPostgresHealthy()
       .isPostgresHealthy('authentication'),
 
-    getBuilder(process.env.DNS_SEARCH_TARGET)
+    getBuilder(DNS_SEARCH_TARGET)
       .isPostgresHealthy(),
 
-    getTextReqBuilder(process.env.DNS_PORTAL_TARGET),
+    getTextReqBuilder(DNS_PORTAL_TARGET),
 
-    getTextReqBuilder(process.env.DNS_2CNNCT_TARGET),
+    getTextReqBuilder(DNS_2CNNCT_TARGET),
 
-    getTextReqBuilder(process.env.DNS_3CNNCT_TARGET)
+    getTextReqBuilder(DNS_3CNNCT_TARGET)
   ]
 }
 

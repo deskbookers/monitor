@@ -19,7 +19,7 @@ class AssertBuilder {
     this.asserts = []
   }
 
-  assertNoTimeout (timeout = 2000) {
+  assertNoTimeout (timeout) {
     this.asserts.push(async () => {
       try {
         const context = await this.get({timeout})
