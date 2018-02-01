@@ -17,7 +17,7 @@ async function main () {
     console.log(errors.join('\n'))
     await email.send('There is something wrong! 😱😱😱', errors)
   } else {
-    console.log('No errors found!')
+    console.log('No errors found!\nRan at: ', new Date())
   }
 
   console.log('Monitor process finished!')

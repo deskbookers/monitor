@@ -1,15 +1,24 @@
 const nodemailer = require('nodemailer')
 
 const {
-  SMTP_HOST,
-  SMTP_PORT,
+  EMAIL_SMTP_HOST,
+  EMAIL_SMTP_PORT,
+  EMAIL_SMTP_USERNAME,
+  EMAIL_SMTP_PASSWORD,
+  EMAIL_SMTP_TLS,
+
   EMAIL_FROM,
   EMAIL_TO
 } = process.env
 
 let transporter = nodemailer.createTransport({
-  host: SMTP_HOST,
-  port: SMTP_PORT
+  host: EMAIL_SMTP_HOST,
+  port: EMAIL_SMTP_PORT,
+  secure: (EMAIL_SMTP_TLS === 'true'),
+  auth: {
+    user: EMAIL_SMTP_USERNAME,
+    pass: EMAIL_SMTP_PASSWORD
+  }
 })
 
 async function send (subject, errors) {
