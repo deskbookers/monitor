@@ -15,7 +15,8 @@ async function main () {
   if (errors && errors.length) {
     console.log('Errors found! sending email...')
     console.log(errors.join('\n'))
-    await email.send('There is something wrong! 😱😱😱', errors)
+    const { response } = await email.send('There is something wrong! 😱😱😱', errors)
+    console.log('Response from mail: ', response)
   } else {
     console.log('No errors found!\nRan at: ', new Date())
   }

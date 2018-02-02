@@ -22,15 +22,20 @@ let transporter = nodemailer.createTransport({
 })
 
 async function send (subject, errors) {
-  let options = {
-    from: EMAIL_FROM,
-    to: EMAIL_TO,
-    subject,
-    text: errors.join('\n'),
-    html: errors.join('<br />')
-  }
+  try {
+    let options = {
+      from: EMAIL_FROM,
+      to: EMAIL_TO,
+      subject,
+      text: errors.join('\n'),
+      html: errors.join('<br />')
+    }
 
-  await transporter.sendMail(options)
+    const res = await transporter.sendMail(options)
+    return { response: res.response }
+  } catch (exception) {
+    return { response: exception }
+  }
 }
 
 module.exports = { send }
