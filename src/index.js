@@ -13,13 +13,14 @@ async function main () {
 
   if (errors && errors.length) {
     console.log('Errors found! sending email...')
+
     const descriptions = errors
       .map(prettyError)
       .join('\n')
     console.log(descriptions)
 
     const subject = 'There is something wrong! 😱😱😱'
-    const { response } = await email.send(subject, errors)
+    const { response } = await email.send(subject, descriptions)
     console.log(`Response from mail: ${response}`)
   } else {
     console.log('No errors found!\nRan at: ', new Date())
