@@ -57,8 +57,8 @@ class AssertBuilder {
   }
 
   isRedisHealthy () {
-    this.asserts.push(reply => {
-      const redisNode = get(reply.data, 'cache.redis.healthy', false)
+    this.asserts.push(ctx => {
+      const redisNode = get(ctx.data, 'cache.redis.healthy', false)
 
       return (redisNode === true)
         ? success()

@@ -10,18 +10,26 @@ async function main () {
 
   const errors = asserts
     .filter(x => !x.result)
-    .map(err => `Error on ${err.context.target}: ${err.message}`)
 
   if (errors && errors.length) {
     console.log('Errors found! sending email...')
-    console.log(errors.join('\n'))
-    const { response } = await email.send('There is something wrong! 😱😱😱', errors)
-    console.log('Response from mail: ', response)
+    const descriptions = errors
+      .map(prettyError)
+      .join('\n')
+    console.log(descriptions)
+
+    const subject = 'There is something wrong! 😱😱😱'
+    const { response } = await email.send(subject, errors)
+    console.log(`Response from mail: ${response}`)
   } else {
     console.log('No errors found!\nRan at: ', new Date())
   }
 
   console.log('Monitor process finished!')
 }
+
+const prettyError = err =>
+  `Error on ${err.context.target}: ${err.message}
+   ${JSON.stringify(err.context.data)}\n`
 
 main()

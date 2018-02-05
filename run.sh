@@ -1,7 +1,4 @@
 #!/bin/bash
 
-# set current directory
 cd "$(dirname "$0")"
-
-# execute monitor
-yarn start
+/home/ubuntu/.nvm/versions/node/v8.9.2/bin/node -r dotenv/config src/index.js
