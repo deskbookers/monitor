@@ -14,10 +14,8 @@ async function main () {
   if (errors && errors.length) {
     console.log('Errors found! sending email...')
 
-    const descriptions = errors
-      .map(prettyError)
-      .join('\n')
-    console.log(descriptions)
+    const descriptions = errors.map(prettyError)
+    console.log(descriptions.join('\n'))
 
     const subject = 'There is something wrong! 😱😱😱'
     const { response } = await email.send(subject, descriptions)
