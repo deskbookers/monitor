@@ -25,7 +25,9 @@ async function send (subject, errors) {
   try {
     let options = {
       from: EMAIL_FROM,
-      to: EMAIL_TO,
+      to: EMAIL_TO.indexOf(',') > 0
+        ? EMAIL_TO.split(',')
+        : EMAIL_TO,
       subject,
       text: errors.join('\n'),
       html: errors.join('<br />')
