@@ -7,16 +7,18 @@
   "author": "deskbookers",
   "license": "UNLICENSED",
   "private": true,
-	"scripts": {
-		"start": "node -r dotenv/config src/",
-		"start:dev": "nodemon -r dotenv/config src/",
-		"start:dev:L": "nodemon -L -r dotenv/config src/",
-		"lint": "eslint src",
-		"prepush": "yarn lint"
-	},
+  "scripts": {
+    "start": "node -r dotenv/config src/",
+    "start:dev": "nodemon -r dotenv/config src/",
+    "start:dev:L": "nodemon -L -r dotenv/config src/",
+    "lint": "eslint src",
+    "prepush": "yarn lint"
+  },
   "dependencies": {
     "dotenv": "^4.0.0",
     "lodash": "^4.17.4",
+    "lowdb": "^1.0.0",
+    "moment": "^2.21.0",
     "node-fetch": "^1.7.3",
     "nodemailer": "^4.4.2"
   },
