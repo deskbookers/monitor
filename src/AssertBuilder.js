@@ -1,15 +1,18 @@
 const { get } = require('lodash')
+const moment = require('moment')
 
 const success = (context = {}) => ({
   context,
   result: true,
-  message: null
+  message: null,
+  date: moment().format('X')
 })
 
 const fail = (message, context = {}) => ({
   message,
   context,
-  result: false
+  result: false,
+  date: moment().format('X')
 })
 
 class AssertBuilder {
