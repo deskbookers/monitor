@@ -36,10 +36,12 @@ async function main () {
 }
 
 const prettyError = target =>
-  `Error on ${target.target}:\n${target.errors.map(error =>
-    `${moment.unix(error.date).format()} ` +
-    `${error.message} ` +
-    `${JSON.stringify(error.context.data) || ''}`
-  ).join('\n')}`
+  `Error on ${target.target}:\n${target.errors
+    .filter(error => !error.result)
+    .map(error =>
+      `${moment.unix(error.date).format()} ` +
+      `${error.message} ` +
+      `${JSON.stringify(error.context.data) || ''}`
+    ).join('\n')}`
 
 main()
